@@ -6,6 +6,7 @@ import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRou
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import Homepage from './components/Homepage/Homepage'
+import ThreadCreate from './components/CreateThreads/CreateThreads'
 // import UnauthenticatedIndexThreads from './components/UnauthenticatedIndexThreads/UnauthenticatedIndexThreads'
 // import AuthenticatedIndexThreads from './components/AuthenticatedIndexThreads/AuthenticatedIndexThreads'
 import SignUp from './components/SignUp/SignUp'
@@ -70,6 +71,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} path='/createThread' render={() => (
+            <ThreadCreate msgAlert={this.msgAlert} user={user} />
           )} />
         </main>
       </Fragment>
