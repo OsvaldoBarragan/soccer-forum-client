@@ -1,1 +1,7 @@
 @import '~bootstrap/scss/bootstrap';
+
+.categories {
+   &:hover {
+       background-color: grey;
+   }
+}

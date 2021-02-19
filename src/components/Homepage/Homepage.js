@@ -1,17 +1,5 @@
-// import React, { Component } from 'react'
-// import { Table } from '@material-ui/core'
-//
-// class UnauthHomepage extends Component {
-//   constructor (props) {
-//     super(props)
-//
-//     this.state = {}
-//   }
-//
-//   showCategories
-// }
-
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -27,23 +15,23 @@ const useStyles = makeStyles({
   }
 })
 
-function createData (categories, description, threads, comments) {
-  return { categories, description, threads, comments }
+function createData (category, description, threads, comments) {
+  return { category, description, threads, comments }
 }
 
 const rows = [
-  createData('Premier League', 'Everything about England\'s top flight', 1, 2),
-  createData('Serie A', 'Serie A News and Discussions', 1, 2),
-  createData('La Liga', 'All about La Liga', 1, 2),
-  createData('Ligue 1', 'Discussions and Information about France\'s top league', 1, 2),
-  createData('Bundesliga', 'Germany\'s top league', 1, 2),
-  createData('Other Leagues', 'Discuss about lesser-known leagues here', 1, 2),
-  createData('International', 'News about International teams', 1, 2),
-  createData('Bootroom', 'Discuss soccer in general', 1, 2),
-  createData('Off Topic', 'Discuss anything in general', 1, 2)
+  createData('Premier League', 'Everything about England\'s top flight', 0, 0),
+  createData('Serie A', 'Serie A News and Discussions', 0, 0),
+  createData('La Liga', 'All about La Liga', 0, 0),
+  createData('Ligue 1', 'Discussions and Information about France\'s top league', 0, 0),
+  createData('Bundesliga', 'Germany\'s top league', 0, 0),
+  createData('Other Leagues', 'Discuss about lesser-known leagues here', 0, 0),
+  createData('International', 'News about International teams', 0, 0),
+  createData('Bootroom', 'Discuss soccer in general', 0, 0),
+  createData('Off Topic', 'Discuss anything in general', 0, 0)
 ]
 
-export default function BasicTable () {
+export default function BasicTable (e) {
   const classes = useStyles()
 
   return (
@@ -51,7 +39,7 @@ export default function BasicTable () {
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Categories</TableCell>
+            <TableCell>Category</TableCell>
             <TableCell align="right">Description</TableCell>
             <TableCell align="right">Threads</TableCell>
             <TableCell align="right">Comments</TableCell>
@@ -59,9 +47,9 @@ export default function BasicTable () {
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.categories}>
-              <TableCell component="th" scope="row">
-                {row.categories}
+            <TableRow key={row.category}>
+              <TableCell className="categories" component="th" scope="row">
+                <Link to={`/category/${row.category}`}>{row.category}</Link>
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
               <TableCell align="right">{row.threads}</TableCell>
