@@ -25,3 +25,13 @@ export const threadShow = id => {
     method: 'GET'
   })
 }
+
+export const threadDelete = (id, user) => {
+  return axios({
+    url: apiUrl + '/threads/' + id,
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  })
+}

@@ -17,11 +17,6 @@ class ThreadShow extends Component {
 
     threadShow(match.params.id)
       .then(res => this.setState({ thread: res.data.thread }))
-      .then(() => msgAlert({
-        heading: 'Thread was Successfully Reached',
-        message: 'Enjoy the thread.',
-        variant: 'success'
-      }))
       .catch(error => {
         msgAlert({
           heading: 'The Thread has Failed to Show',
@@ -49,6 +44,7 @@ class ThreadShow extends Component {
     return (
       <div>
         <h2>{thread.title}</h2>
+        <h5>Created by: {thread.owner}</h5>
         <h6>{thread.category}</h6>
         <p>{thread.post}</p>
         <p>{threadDate}</p>

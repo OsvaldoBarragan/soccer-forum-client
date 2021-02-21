@@ -21,14 +21,8 @@ const ThreadForm = ({ thread, handleSubmit, handleChange }) => (
       onChange={handleChange}
     />
     <label>Category</label>
-    {/* // <input
-    //   required
-    //   placeholder='Choose a category'
-    //   name='category'
-    //   value={thread.category}
-    //   onChange={handleChange}
-    // /> */}
     <select required placeholder='Choose a Category' name='category' value={thread.category} onChange={handleChange}>
+      <option disabled={true} value="" className='placeholderValue'>Choose a Category</option>
       <option value="Premier League">Premier League</option>
       <option value="Serie A">Serie A</option>
       <option value="La Liga">La Liga</option>
