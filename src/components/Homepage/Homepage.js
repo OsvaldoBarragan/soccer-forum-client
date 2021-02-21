@@ -49,7 +49,7 @@ export default function BasicTable (e) {
           {rows.map((row) => (
             <TableRow key={row.category}>
               <TableCell className="categories" component="th" scope="row">
-                <Link to={`/category/${row.category}`}>{row.category}</Link>
+                <Link to={`/category/${row.category}/threads`}>{row.category}</Link>
               </TableCell>
               <TableCell align="right">{row.description}</TableCell>
               <TableCell align="right">{row.threads}</TableCell>

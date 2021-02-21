@@ -50,7 +50,7 @@ class ThreadCreate extends Component {
   render () {
     const { thread, createdId } = this.state
     if (createdId) {
-      return <Redirect to={`/threads/${createdId}`} />
+      return <Redirect to={`/category/${thread.category}/threads/${createdId}`} />
     }
     return (
       <div>

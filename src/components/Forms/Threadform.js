@@ -5,6 +5,7 @@ const ThreadForm = ({ thread, handleSubmit, handleChange }) => (
     <label>Title</label>
     <input
       required
+      maxLength='50'
       placeholder='Enter Thread Title'
       name='title'
       value={thread.title}
@@ -13,6 +14,7 @@ const ThreadForm = ({ thread, handleSubmit, handleChange }) => (
     <label>Post</label>
     <input
       required
+      maxLength='80'
       placeholder='Enter Description'
       name='post'
       value={thread.post}

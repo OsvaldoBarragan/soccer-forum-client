@@ -6,9 +6,9 @@ import AuthenticatedRoute from './components/AuthenticatedRoute/AuthenticatedRou
 import AutoDismissAlert from './components/AutoDismissAlert/AutoDismissAlert'
 import Header from './components/Header/Header'
 import Homepage from './components/Homepage/Homepage'
-import ThreadCreate from './components/CreateThreads/CreateThreads'
-// import UnauthenticatedIndexThreads from './components/UnauthenticatedIndexThreads/UnauthenticatedIndexThreads'
-// import AuthenticatedIndexThreads from './components/AuthenticatedIndexThreads/AuthenticatedIndexThreads'
+import ThreadCreate from './components/CreateThread/CreateThread'
+import ThreadShow from './components/ShowThread/ShowThread'
+import ThreadIndex from './components/IndexThreads/IndexThreads'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import SignOut from './components/SignOut/SignOut'
@@ -74,6 +74,12 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/createThread' render={() => (
             <ThreadCreate msgAlert={this.msgAlert} user={user} />
+          )} />
+          <Route exact path='/category/:category/threads' render={() => (
+            <ThreadIndex msgAlert={this.msgAlert} />
+          )} />
+          <Route path='/category/:category/threads/:id' render={() => (
+            <ThreadShow msgAlert={this.msgAlert} />
           )} />
         </main>
       </Fragment>

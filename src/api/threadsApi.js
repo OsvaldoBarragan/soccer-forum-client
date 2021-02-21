@@ -12,15 +12,16 @@ export const threadCreate = (user, thread) => {
   })
 }
 
-export const threadIndex = user => {
+export const threadIndex = () => {
   return axios({
     url: apiUrl + '/threads',
     method: 'GET'
   })
 }
 
-export const threadShow = (id, user) => {
+export const threadShow = id => {
   return axios({
-    url: apiUrl + '/threads' + id
+    url: apiUrl + '/threads/' + id,
+    method: 'GET'
   })
 }
