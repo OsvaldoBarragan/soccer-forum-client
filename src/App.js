@@ -76,7 +76,7 @@ class App extends Component {
             <ThreadCreate msgAlert={this.msgAlert} user={user} />
           )} />
           <Route exact path='/category/:category/threads' render={() => (
-            <ThreadIndex msgAlert={this.msgAlert} />
+            <ThreadIndex msgAlert={this.msgAlert} user={user} />
           )} />
           <Route path='/category/:category/threads/:id' render={() => (
             <ThreadShow msgAlert={this.msgAlert} />

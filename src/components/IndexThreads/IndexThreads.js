@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -14,6 +14,8 @@ class ThreadIndex extends Component {
   constructor (props) {
     super(props)
 
+    console.log('Constructor: ')
+    console.log(props)
     this.state = {
       threads: null,
       deleted: false
@@ -22,7 +24,6 @@ class ThreadIndex extends Component {
 
   componentDidMount () {
     const { msgAlert } = this.props
-
     threadIndex()
       .then(res => this.setState({ threads: res.data.threads }))
       .catch(error => {
@@ -34,24 +35,38 @@ class ThreadIndex extends Component {
       })
   }
 
-  handleDelete = event => {
-    const { user, msgAlert, match } = this.props
+  handleDelete = id => {
+    const { user, msgAlert } = this.props
+
+    console.log('Props for index: ')
     console.log(this.props)
 
-    threadDelete(match.params.id, user)
-      .then(() => this.setState({ deleted: true }))
-      .catch(error => {
-        msgAlert({
-          heading: 'Thread Deletion: Failed',
-          message: 'An error has occured while deleting: ' + error.message,
-          variant: 'danger'
+    if (user) {
+      threadDelete(id, user)
+        .then(() => this.setState({ deleted: null }))
+        .catch(error => {
+          msgAlert({
+            heading: 'Thread Deletion: Failed',
+            message: 'You do not have permission to delete: ' + error.message,
+            variant: 'danger'
+          })
         })
-      })
+    }
+    if (!user) {
+      threadDelete(id, user)
+        .then(() => this.setState({ deleted: null }))
+        .catch(error => {
+          msgAlert({
+            heading: 'Thread Deletion: Failed',
+            message: 'You do not have an account: ' + error.message,
+            variant: 'danger'
+          })
+        })
+    }
   }
 
   render () {
     const { threads } = this.state
-    console.log('It has reached the render')
 
     if (!threads) {
       return (
@@ -82,11 +97,11 @@ class ThreadIndex extends Component {
                       <Link to={`/category/${thread.category}/threads/${thread._id}`}>{thread.title}</Link>
                     </TableCell>
                     <TableCell align="right">{thread.post}</TableCell>
-                    <TableCell align="right">{thread.owner.username}</TableCell>
+                    <TableCell align="right">{thread.owner}</TableCell>
                     <TableCell align="right">{thread.category}</TableCell>
                     <TableCell align="right">{thread.comment}</TableCell>
                     <TableCell align="right">
-                      <button onClick={this.handleDelete}>Delete Thread</button>
+                      <button id='deleteThread' onClick={() => this.handleDelete(thread._id)}>Delete Thread</button>
                     </TableCell>
                   </TableRow>
                 })
@@ -100,4 +115,4 @@ class ThreadIndex extends Component {
   }
 }
 
-export default ThreadIndex
+export default withRouter(ThreadIndex)

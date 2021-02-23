@@ -7,6 +7,9 @@ class ThreadCreate extends Component {
   constructor (props) {
     super(props)
 
+    console.log('ThreadCreate constructor: ')
+    console.log(props)
+
     this.state = {
       thread: {
         title: '',
@@ -20,6 +23,9 @@ class ThreadCreate extends Component {
     event.preventDefault()
     const { user, msgAlert } = this.props
     const { thread } = this.state
+
+    console.log('Props: ')
+    console.log(this.props)
 
     threadCreate(user, thread)
       .then(res => {
@@ -47,6 +53,7 @@ class ThreadCreate extends Component {
       }
     })
   }
+
   render () {
     const { thread, createdId } = this.state
     if (createdId) {

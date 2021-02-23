@@ -1,4 +1,11 @@
 import React, { Component } from 'react'
+// import Table from '@material-ui/core/Table'
+// import TableBody from '@material-ui/core/TableBody'
+// import TableCell from '@material-ui/core/TableCell'
+// import TableContainer from '@material-ui/core/TableContainer'
+// import TableHead from '@material-ui/core/TableHead'
+// import TableRow from '@material-ui/core/TableRow'
+// import Paper from '@material-ui/core/Paper'
 import Spinner from 'react-bootstrap/Spinner'
 import { withRouter } from 'react-router-dom'
 import { threadShow } from '../../api/threadsApi'
@@ -14,13 +21,12 @@ class ThreadShow extends Component {
 
   componentDidMount () {
     const { match, msgAlert } = this.props
-
     threadShow(match.params.id)
       .then(res => this.setState({ thread: res.data.thread }))
       .catch(error => {
         msgAlert({
-          heading: 'The Thread has Failed to Show',
-          message: 'An error has occured. The error is: ' + error.message,
+          heading: 'Failed to Show Threads',
+          message: 'An error has occured while loading threads. The error is: ' + error.message,
           variant: 'danger'
         })
       })
@@ -48,7 +54,27 @@ class ThreadShow extends Component {
         <h6>{thread.category}</h6>
         <p>{thread.post}</p>
         <p>{threadDate}</p>
-        <p>{thread.comment}</p>
+        {/* <Link to='/createComment'>Create a Comment</Link>
+        <TableContainer component={Paper}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="right">User</TableCell>
+                <TableCell align="right">Comment</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                thread.comments.map((comments, index) => {
+                  return <TableRow key={index}>
+                    <TableCell align="right">{comments.owner}</TableCell>
+                    <TableCell align="right">{comments.body}</TableCell>
+                  </TableRow>
+                })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer> */}
       </div>
     )
   }
